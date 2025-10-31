@@ -1,0 +1,20 @@
+@using Presupuestos
+@model List<Presupuestos.Presupuesto>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th> <th>Nombre Destinatario</th> <th>Fecha Creacion</th> <th>Detalles</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Presupuesto presupuesto in @Model){
+            <tr>
+                <th>@presupuesto.IdPresupuesto</th> <th>@presupuesto.NombreDestinatario</th> <th>@presupuesto.FechaCreacion</th> <th><a asp-action="Detalles" asp-route-id="@presupuesto.IdPresupuesto" asp-controller="Presupuestos" asp-area="">Ver detalles</a></th>
+            </tr>
+        }
+    </tbody>
+</table>

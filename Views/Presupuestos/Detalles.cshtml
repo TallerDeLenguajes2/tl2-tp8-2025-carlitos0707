@@ -1,0 +1,35 @@
+@using Presupuestos
+@using PresupuestosDetalles
+@using Productos
+@model Presupuesto
+
+<h2>
+    Id:  Nombre:  Fecha: 
+</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Model.IdPresupuesto</th> <th>@Model.NombreDestinatario</th> <th>@Model.FechaCreacion</th>
+        </tr>
+        <tr>
+            <th>Id producto</th> <th>Detalles</th> <th>Cantidad</th> <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(DetallePresupuesto detalle in @Model.Detalles){
+            <tr>
+                <td>@detalle.producto.IdProducto</td> <td>@detalle.producto.Descripcion</td> <td>@detalle.Cantidad</td> <td>@detalle.Total()</td>
+            </tr>
+        }
+        <tr>
+            <td colspan="2"></td> <td>Total Presupuesto</td> <td>@Model.MontoPresupuesto()</td> 
+        </tr>
+        <tr>
+            <td colspan="2"></td> <td>IVA</td> <td>%21</td> 
+        </tr>
+        <tr>
+            <td colspan="2"></td> <td>Total Presupuesto + IVA</td> <td>@Model.MontoPresupuestoIVA()</td> 
+        </tr>
+    </tbody>
+</table>

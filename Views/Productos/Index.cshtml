@@ -1,0 +1,20 @@
+@using Productos
+@model List<Productos.Producto>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th> <th>Descripcion</th> <th>Precio</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Producto producto in @Model){
+            <tr>
+                <th>@producto.IdProducto</th> <th>@producto.Descripcion</th> <th>@producto.Precio</th>
+            </tr>
+        }
+    </tbody>
+</table>
