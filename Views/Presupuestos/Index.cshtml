@@ -13,7 +13,7 @@
     <tbody>
         @foreach(Presupuesto presupuesto in @Model){
             <tr>
-                <th>@presupuesto.IdPresupuesto</th> <th>@presupuesto.NombreDestinatario</th> <th>@presupuesto.FechaCreacion</th> <th><a asp-action="Detalles" asp-route-id="@presupuesto.IdPresupuesto" asp-controller="Presupuestos" asp-area="">Ver detalles</a></th>
+                <td>@presupuesto.IdPresupuesto</td> <td>@presupuesto.NombreDestinatario</td> <td>@presupuesto.FechaCreacion</td> <td><a asp-action="Detalles" asp-route-id="@presupuesto.IdPresupuesto" asp-controller="Presupuestos" asp-area="">Ver detalles</a></td>
             </tr>
         }
     </tbody>

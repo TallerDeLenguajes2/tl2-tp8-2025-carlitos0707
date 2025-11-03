@@ -1,0 +1,15 @@
+@using Productos
+@model Producto
+
+
+<form  asp-controller="Productos" asp-action="Delete" method="post">
+    <label>Borrar Producto?</label>
+    <label for="Id" class="form-label">Id</label>
+    <input id="Id" value="@Model.IdProducto" asp-for="IdProducto" class="form-control" readonly/>
+    <label for="Desc" class="form-label">Descripcion</label>
+    <input id="Desc" value="@Model.Descripcion" asp-for="Descripcion" class="form-control" readonly/>
+    <label for="Precio" class="form-label">Precio</label>
+    <input id="Precio" value="@Model.Precio" asp-for="Precio" class="form-control" readonly/>
+    <input value="si" type="submit" class="btn btn-warning"/>
+    <a asp-controller="Productos" asp-action="Index" class="btn btn-warning" >No</a>
+</form>

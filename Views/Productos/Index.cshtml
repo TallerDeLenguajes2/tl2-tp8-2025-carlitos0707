@@ -1,4 +1,5 @@
 @using Productos
+@using System.Reflection
 @model List<Productos.Producto>
 @{
     ViewData["Title"] = "Home Page";
@@ -7,13 +8,13 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Id</th> <th>Descripcion</th> <th>Precio</th> <th>Editar</th>
+            <th>Id</th> <th>Descripcion</th> <th>Precio</th> <th>Editar</th> <th>Borrar</th>
         </tr>
     </thead>
     <tbody>
         @foreach(Producto producto in @Model){
             <tr>
-                <td>@producto.IdProducto</td> <td>@producto.Descripcion</td> <td>@producto.Precio</td> <td><a asp-controller="Productos" asp-action="Edit" asp-route-id="@producto.IdProducto">Editar</a></td>
+                <td>@producto.IdProducto</td> <td>@producto.Descripcion</td> <td>@producto.Precio</td> <td><a asp-controller="Productos" asp-action="Edit" asp-route-id="@producto.IdProducto" class="btn btn-warning">Editar</a><td> <td><a asp-controller="Productos" asp-action="Delete" asp-route-id="@producto.IdProducto" class="btn btn-danger">Borrar</a></td>
             </tr>
         }
     </tbody>

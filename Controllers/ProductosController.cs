@@ -27,11 +27,12 @@ public class ProductosController : Controller
         return View();
     }
 
-    [HttpPost("Create")]
+    [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Create(Producto producto)
     {
         repo.Insertar(producto);
-        return View();
+        return RedirectToAction("Index");
     }
 
 
@@ -41,10 +42,26 @@ public class ProductosController : Controller
         return View(producto);
     }
 
-    [HttpPut("Edit")]
+    [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Edit(Producto producto)
     {
         repo.Update(producto);
-        return View();
+        return RedirectToAction("Index");
+    }
+
+    public IActionResult Delete(int id)
+    {
+        Producto producto = repo.GetById(id);
+        return View(producto);
+    }
+
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Delete(Producto producto)
+    {
+        repo.Delete(producto.IdProducto);
+        return RedirectToAction("Index");
     }
 }

@@ -2,9 +2,9 @@
 @model Producto
 
 
-<form asp-controller="Productos" asp-action="Create" method="post">
+<form asp-controller="Productos" asp-action="Edit" method="post">
     <label class="form-label" for="Id">Id</label>
-    <input class="form-control" value="@Model.IdProducto" id="Id" type="number" asp-for="IdProducto" disabled/>
+    <input class="form-control" value="@Model.IdProducto" id="Id" type="number" asp-for="IdProducto" readonly/>
     <label for="Descripcion" class="form-label">Descripcion</label>
     <input id="Descripcion" class="form-control" type="text" asp-for="Descripcion" >
     <label for="Precio" class="form-label">Precio</label>
