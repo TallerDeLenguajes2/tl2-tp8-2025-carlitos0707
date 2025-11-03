@@ -7,13 +7,13 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Id</th> <th>Descripcion</th> <th>Precio</th>
+            <th>Id</th> <th>Descripcion</th> <th>Precio</th> <th>Editar</th>
         </tr>
     </thead>
     <tbody>
         @foreach(Producto producto in @Model){
             <tr>
-                <th>@producto.IdProducto</th> <th>@producto.Descripcion</th> <th>@producto.Precio</th>
+                <td>@producto.IdProducto</td> <td>@producto.Descripcion</td> <td>@producto.Precio</td> <td><a asp-controller="Productos" asp-action="Edit" asp-route-id="@producto.IdProducto">Editar</a></td>
             </tr>
         }
     </tbody>

@@ -33,6 +33,7 @@ public class ProductoRepository : IProductoRepository
         using var comando = new SqliteCommand(sql, conexion);
         comando.Parameters.Add(new SqliteParameter("@Id", id));
         comando.ExecuteNonQuery();
+        conexion.Close();
     }
 
     public List<Producto> GetAll()
@@ -53,6 +54,7 @@ public class ProductoRepository : IProductoRepository
             };
             productos.Add(p);
         }
+        conexion.Close();
         return productos;
     }
 
@@ -74,6 +76,7 @@ public class ProductoRepository : IProductoRepository
             Descripcion = lector["Descripcion"].ToString(),
             Precio = Convert.ToInt32(lector["Precio"])
         };
+        conexion.Close();
         return producto;   
     }
 
@@ -81,12 +84,24 @@ public class ProductoRepository : IProductoRepository
     {
         using var conexion = new SqliteConnection(cadenaConexion);
         conexion.Open();
-        string sql = "INSERT INTO Productos (idProducto,Descripcion,Precio) VALUES (@id,@descripcion,@precio)";
+        string sql = "SELECT MAX(idProducto) as id FROM Productos";
+        using var select = new SqliteCommand(sql, conexion);
+        using var lector = select.ExecuteReader();
+        if (!lector.Read())
+        {
+            producto.IdProducto = -1;
+        }
+        else
+        {
+            producto.IdProducto = Convert.ToInt32(lector["id"]) + 1;
+        }
+        sql = "INSERT INTO Productos (idProducto,Descripcion,Precio) VALUES (@id,@descripcion,@precio)";
         using var comando = new SqliteCommand(sql, conexion);
         comando.Parameters.Add(new SqliteParameter("@id", producto.IdProducto));
         comando.Parameters.Add(new SqliteParameter("@descripcion", producto.Descripcion));
         comando.Parameters.Add(new SqliteParameter("@precio", producto.Precio));
         comando.ExecuteNonQuery();
+        conexion.Close();
     }
 
     public void Update(Producto producto)
@@ -99,5 +114,6 @@ public class ProductoRepository : IProductoRepository
         comando.Parameters.Add(new SqliteParameter("@precio", producto.Precio));
         comando.Parameters.Add(new SqliteParameter("@id", producto.IdProducto));
         comando.ExecuteNonQuery();
+        conexion.Close();
     }
 }

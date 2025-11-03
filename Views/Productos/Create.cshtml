@@ -1,0 +1,10 @@
+@using Productos
+@model Producto;
+<form asp-controller="Productos" asp-action="Create" method="post">
+    <input type="number" value="0" asp-for="IdProducto" hidden/>
+    <label for="Descripcion" class="form-label">Descripcion</label>
+    <input id="Descripcion" class="form-control" type="text" asp-for="Descripcion" >
+    <label for="Precio" class="form-label">Precio</label>
+    <input id="Precio" class="form-control" type="number" asp-for="Precio" />
+    <input type="submit" class="btn" />
+</form>

@@ -21,4 +21,30 @@ public class ProductosController : Controller
         List<Producto> productos = repo.GetAll();
         return View(productos);
     }
+
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost("Create")]
+    public IActionResult Create(Producto producto)
+    {
+        repo.Insertar(producto);
+        return View();
+    }
+
+
+    public IActionResult Edit(int id)
+    {
+        Producto producto = repo.GetById(id);
+        return View(producto);
+    }
+
+    [HttpPut("Edit")]
+    public IActionResult Edit(Producto producto)
+    {
+        repo.Update(producto);
+        return View();
+    }
 }

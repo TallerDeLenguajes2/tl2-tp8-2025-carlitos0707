@@ -121,3 +121,4 @@ C:\Users\carlo\OneDrive\Desktop\3ero\Taller II\TP8\tl2-tp8-2025-carlitos0707\obj
 C:\Users\carlo\OneDrive\Desktop\3ero\Taller II\TP8\tl2-tp8-2025-carlitos0707\obj\Debug\net9.0\tl2-tp8-2025-carlitos0707.pdb
 C:\Users\carlo\OneDrive\Desktop\3ero\Taller II\TP8\tl2-tp8-2025-carlitos0707\obj\Debug\net9.0\tl2-tp8-2025-carlitos0707.genruntimeconfig.cache
 C:\Users\carlo\OneDrive\Desktop\3ero\Taller II\TP8\tl2-tp8-2025-carlitos0707\obj\Debug\net9.0\ref\tl2-tp8-2025-carlitos0707.dll
+C:\Users\carlo\OneDrive\Desktop\3ero\Taller II\TP8\tl2-tp8-2025-carlitos0707\obj\Debug\net9.0\tl2-tp8-2025-carlitos0707.sourcelink.json
