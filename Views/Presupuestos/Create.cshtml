@@ -1,0 +1,12 @@
+@using Presupuestos
+@model Presupuesto
+
+<fieldset>
+    <legend>Crear presupuesto</legend>
+    <form asp-controller="Presupuestos" asp-action="Create" method="post">
+        <label for="Nombre" class="form-label">Nombre destinatario</label>
+        <input id="Nombre" class="form-control" type="text" asp-for="NombreDestinatario" />
+        <label for="Fecha" class="form-label">Fecha de creacion</label>
+        <input id="Fecha" class="form-control" type="datetime-local" asp-for="FechaCreacion"/>
+    </form>
+</fieldset>

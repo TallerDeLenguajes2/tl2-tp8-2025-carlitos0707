@@ -27,6 +27,7 @@ public class PresupuestoRepository : IPresupuestoRepository
         comando.Parameters.Add(new SqliteParameter("@idpres", IdPresupuesto));
         comando.Parameters.Add(new SqliteParameter("@cant", cantidad));
         comando.ExecuteNonQuery();
+        conexion.Close();
 
     }
 
@@ -40,6 +41,7 @@ public class PresupuestoRepository : IPresupuestoRepository
         comando.Parameters.Add(new SqliteParameter("@nombre", presupuesto.NombreDestinatario));
         comando.Parameters.Add(new SqliteParameter("@fecha", presupuesto.FechaCreacion.ToString("yyyy-MM-dd")));
         comando.ExecuteNonQuery();
+        conexion.Close();
     }
 
     public List<DetallePresupuesto> GetDetalles(int id)
@@ -61,17 +63,22 @@ public class PresupuestoRepository : IPresupuestoRepository
             };
             detalles.Add(detalle);
         }
+        conexion.Close();
         return detalles;
     }
 
-    public void BorrarDetalles(int id)
+
+    public void Update(Presupuesto presupuesto)
     {
         using var conexion = new SqliteConnection(cadenaConexion);
         conexion.Open();
-        string sql = "DELETE FROM PresupuestosDetalle WHERE idPresupuesto = @id";
+        string sql = "UPDATE Presupuestos SET NombreDestinatario = @nombre ,FechaCreacion = @fecha WHERE idPresupuesto = @id";
         using var comando = new SqliteCommand(sql, conexion);
-        comando.Parameters.Add(new SqliteParameter("@id", id));
+        comando.Parameters.Add(new SqliteParameter("@id",presupuesto.IdPresupuesto));
+        comando.Parameters.Add(new SqliteParameter("@nombre", presupuesto.NombreDestinatario));
+        comando.Parameters.Add(new SqliteParameter("@fecha", presupuesto.FechaCreacion));
         comando.ExecuteNonQuery();
+        conexion.Close();
     }
 
     public void EliminarDetalles(int id)
@@ -82,6 +89,7 @@ public class PresupuestoRepository : IPresupuestoRepository
         using var comando = new SqliteCommand(sql, conexion);
         comando.Parameters.Add(new SqliteParameter("@id", id));
         comando.ExecuteNonQuery();
+        conexion.Close();
     }
 
     public void Eliminar(int id)
@@ -93,6 +101,7 @@ public class PresupuestoRepository : IPresupuestoRepository
         using var comando = new SqliteCommand(sql, conexion);
         comando.Parameters.Add(new SqliteParameter("@id", id));
         comando.ExecuteNonQuery();
+        conexion.Close();
 
     }
 
@@ -115,7 +124,7 @@ public class PresupuestoRepository : IPresupuestoRepository
             };
             presupuestos.Add(presupuesto);
         }
-
+        conexion.Close();
         return presupuestos;
     }
 
@@ -138,7 +147,7 @@ public class PresupuestoRepository : IPresupuestoRepository
             FechaCreacion = Convert.ToDateTime(lector["FechaCreacion"]),
             Detalles = GetDetalles(Convert.ToInt32(id))
         };
-
+        conexion.Close();
         return presupuesto;
     }
 }

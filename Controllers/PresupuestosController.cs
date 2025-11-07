@@ -25,6 +25,51 @@ public class PresupuestosController : Controller
     public IActionResult Detalles(int id)
     {
         Presupuesto presupuesto = repo.ObtenerPorID(id);
-        return View(presupuesto);   
+        return View(presupuesto);
+    }
+
+
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+
+
+    [HttpPost]
+    public IActionResult Create(Presupuesto presupuesto)
+    {
+        repo.CrearPresupuesto(presupuesto);
+        return RedirectToAction("Index");
+    }
+
+
+    public IActionResult Edit(int id)
+    {
+        Presupuesto presupuesto = repo.ObtenerPorID(id);
+        return View(presupuesto);
+    }
+
+
+    [HttpPost]
+    public IActionResult Edit(Presupuesto presupuesto)
+    {
+        repo.Update(presupuesto);
+        return RedirectToAction("Index");
+    }
+
+
+    public IActionResult Delete(int id)
+    {
+        Presupuesto presupuesto = repo.ObtenerPorID(id);
+        return View(presupuesto);
+    }
+
+
+    [HttpPost]
+    public IActionResult Delete(Presupuesto presupuesto)
+    {
+        repo.Eliminar(presupuesto.IdPresupuesto);
+        return RedirectToAction("Index");
     }
 }

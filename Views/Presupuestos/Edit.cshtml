@@ -1,0 +1,12 @@
+@using Presupuestos
+@model Presupuesto
+
+<form asp-controller="Presupuestos" asp-action="Edit" method="post">
+    <label for="Id" class="form-label">Id</label>
+    <input asp-for="IdPresupuesto" id="Id" class="form-control" value="@Model.IdPresupuesto" type="number" readonly/>
+    <label for="Nombre" class="form-label">Nombre destinatario</label>
+    <input asp-for="NombreDestinatario" id="Nombre" class="form-control" value="@Model.NombreDestinatario" type="text" />
+    <label for="Fecha" class="form-label">Fecha creacion</label>
+    <input asp-for="FechaCreacion" id="Fecha" class="form-control" value="@Model.FechaCreacion.ToString("yyyy-MM-ddTHH:mm")" type="datetime-local"/>
+    <input class="btn" type="submit" />
+</form>
