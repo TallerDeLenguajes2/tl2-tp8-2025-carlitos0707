@@ -1,0 +1,17 @@
+@using tl2_tp8_2025_carlitos0707.ViewModel
+@model AgregarProductoViewModel;
+
+<section class="container col-6 border border-width-2 border-dark rounded-3 shadow">
+    <form asp-action="AgregarProducto" asp-controller="Presupuestos" method="post" class="p-5"> 
+        <input type="hidden" value="@Model.IdPresupuesto" asp-for="IdPresupuesto" />
+        <label class="form-label">Cantidad</label>
+        <input type="number" asp-for="Cantidad"  class="form-control"/>
+        <label for="select" class="form-label">Seleccione el producto</label>
+        <select id="select" asp-items="@Model.productos" asp-for="IdProducto" class="form-select">
+            <option>-----Seleccione un producto-----</option>
+        </select>
+        <input value="Agregar" type="submit"  class="btn btn-outline-success my-3"/>
+    </form>
+</section>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

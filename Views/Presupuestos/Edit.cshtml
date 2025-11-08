@@ -1,4 +1,4 @@
-@using Presupuestos
+@using tl2_tp8_2025_carlitos0707.Models;
 @model Presupuesto
 
 <form asp-controller="Presupuestos" asp-action="Edit" method="post">
@@ -10,3 +10,6 @@
     <input asp-for="FechaCreacion" id="Fecha" class="form-control" value="@Model.FechaCreacion.ToString("yyyy-MM-ddTHH:mm")" type="datetime-local"/>
     <input class="btn" type="submit" />
 </form>
+
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

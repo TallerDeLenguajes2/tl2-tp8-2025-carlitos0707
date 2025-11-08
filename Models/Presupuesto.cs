@@ -1,6 +1,7 @@
-namespace Presupuestos;
+using tl2_tp8_2025_carlitos0707.ViewModel;
 
-using PresupuestosDetalles;
+namespace tl2_tp8_2025_carlitos0707.Models;
+
 
 public class Presupuesto
 {
@@ -9,6 +10,24 @@ public class Presupuesto
     public DateTime FechaCreacion { get; set; }
     public List<DetallePresupuesto> Detalles { get; set; }
 
+    public Presupuesto()
+    {
+        
+    }
+
+    public Presupuesto(PresupuestoViewModel presupuestoViewModel)
+    {
+        IdPresupuesto = presupuestoViewModel.IdPresupuesto;
+        NombreDestinatario = presupuestoViewModel.NombreDestinatario;
+        FechaCreacion = presupuestoViewModel.FechaCreacion;
+        Detalles = presupuestoViewModel.Detalles;
+    }
+
+    public Presupuesto(CrearPresupuestoViewModel crearPresupuestoViewModel)
+    {
+        NombreDestinatario = crearPresupuestoViewModel.NombreDestinatario;
+        FechaCreacion = crearPresupuestoViewModel.FechaCreacion;
+    }
     public double MontoPresupuesto()
     {
         double monto = 0;

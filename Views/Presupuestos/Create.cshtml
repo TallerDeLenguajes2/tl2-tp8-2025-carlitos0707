@@ -1,4 +1,4 @@
-@using Presupuestos
+@using tl2_tp8_2025_carlitos0707.Models;
 @model Presupuesto
 
 <fieldset>
@@ -10,3 +10,6 @@
         <input id="Fecha" class="form-control" type="datetime-local" asp-for="FechaCreacion"/>
     </form>
 </fieldset>
+
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

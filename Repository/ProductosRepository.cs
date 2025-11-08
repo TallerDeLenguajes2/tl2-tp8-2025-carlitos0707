@@ -1,6 +1,5 @@
 using Microsoft.Data.Sqlite;
-using Presupuestos;
-using Productos;
+using tl2_tp8_2025_carlitos0707.Models;
 using SQLitePCL;
 
 

@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Productos;
 using tl2_tp8_2025_carlitos0707.Models;
+using tl2_tp8_2025_carlitos0707.ViewModel;
 
 namespace tl2_tp8_2025_carlitos0707.Controllers;
 
@@ -19,47 +19,68 @@ public class ProductosController : Controller
     public IActionResult Index()
     {
         List<Producto> productos = repo.GetAll();
-        return View(productos);
+        List<ProductoViewModel> productosViewModels = new List<ProductoViewModel>();
+
+        foreach (Producto producto in productos)
+        {
+            productosViewModels.Add(new ProductoViewModel(producto));
+        }
+        return View(productosViewModels);
     }
 
     public IActionResult Create()
     {
-        return View();
+        CrearProductoViewModel crearProductoViewModel = new CrearProductoViewModel();
+        return View(crearProductoViewModel);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create(Producto producto)
+    public IActionResult Create(ProductoViewModel producto)
     {
-        repo.Insertar(producto);
+        if (!ModelState.IsValid)
+        {
+            return RedirectToAction("Create");
+        }
+        repo.Insertar(new Producto(producto));
         return RedirectToAction("Index");
     }
 
-
+    [HttpGet]
     public IActionResult Edit(int id)
     {
         Producto producto = repo.GetById(id);
-        return View(producto);
+        if (producto is null)
+        {
+            RedirectToAction("Index");
+        }
+        ProductoViewModel productoViewModel = new ProductoViewModel(producto);
+        return View(productoViewModel);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Edit(Producto producto)
+    public IActionResult Edit(ProductoViewModel producto)
     {
-        repo.Update(producto);
+        repo.Update(new Producto(producto));
         return RedirectToAction("Index");
     }
 
     public IActionResult Delete(int id)
     {
         Producto producto = repo.GetById(id);
-        return View(producto);
+        if (producto is null)
+        {
+            return RedirectToAction("Index");
+        }
+        ProductoViewModel productoViewModel = new ProductoViewModel(producto);
+        return View(productoViewModel);
     }
 
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Delete(Producto producto)
+    public IActionResult Delete(ProductoViewModel producto)
     {
         repo.Delete(producto.IdProducto);
         return RedirectToAction("Index");

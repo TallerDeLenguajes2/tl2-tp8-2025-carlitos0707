@@ -1,6 +1,5 @@
-namespace PresupuestosDetalles;
+namespace tl2_tp8_2025_carlitos0707.Models;
 
-using Productos;
 public class DetallePresupuesto
 {
     public int Cantidad { get; set; }

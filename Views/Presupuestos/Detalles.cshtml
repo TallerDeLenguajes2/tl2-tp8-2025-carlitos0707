@@ -1,7 +1,5 @@
-@using Presupuestos
-@using PresupuestosDetalles
-@using Productos
-@model Presupuesto
+@using tl2_tp8_2025_carlitos0707.ViewModel;
+@model PresupuestoViewModel
 
 <h2>
     Id:  Nombre:  Fecha: 
@@ -20,6 +18,7 @@
         @foreach(DetallePresupuesto detalle in @Model.Detalles){
             <tr>
                 <td>@detalle.producto.IdProducto</td> <td>@detalle.producto.Descripcion</td> <td>@detalle.Cantidad</td> <td>@detalle.Total()</td>
+                <td><a asp-action="BorrarProducto" asp-controller="Presupuestos" asp-route-idPresupuesto="@Model.IdPresupuesto"asp-route-idProducto="@detalle.producto.IdProducto" class="btn btn-outline-danger">Borrar producto</a></td>
             </tr>
         }
         <tr>
@@ -33,3 +32,8 @@
         </tr>
     </tbody>
 </table>
+<hr />
+
+<section>
+<a asp-action="AgregarProducto" asp-controller="Presupuestos" asp-route-id="@Model.IdPresupuesto" class="btn btn-success">Agregar producto</a>
+</section>

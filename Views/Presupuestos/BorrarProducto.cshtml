@@ -1,0 +1,17 @@
+@using tl2_tp8_2025_carlitos0707.ViewModel
+@model DetallesPresupuestoViewModel
+
+<form asp-action="BorrarProducto" asp-controller="Presupuestos" method="post">
+    <label class="form-label">Id presupuesto</label>
+    <input type="number" asp-for="IdPresupuesto" class="form-control" readonly/>
+    <label class="form-label">Id producto</label>
+    <input type="number" asp-for="producto.IdProducto" class="form-control" readonly/>
+    <label class="form-label">Descripcion</label>
+    <input type="text" asp-for="producto.Descripcion" class="form-control" readonly/>
+    <label class="form-label">Precio</label>
+    <input type="number" asp-for="producto.Precio" class="form-control" readonly/>
+    <label class="form-label">Cantidad</label>
+    <input type="number" asp-for="Cantidad" class="form-control" readonly/>
+    <input type="submit" value="borrar" class="btn btn-outline-danger my-4"/>
+
+</form>

@@ -2,8 +2,8 @@ namespace PresupuestosRepository;
 
 using System.Data.SqlTypes;
 using Microsoft.Data.Sqlite;
-using Presupuestos;
-using PresupuestosDetalles;
+using tl2_tp8_2025_carlitos0707.Models;
+using tl2_tp8_2025_carlitos0707.ViewModel;
 
 public interface IPresupuestoRepository
 {
@@ -19,16 +19,80 @@ public class PresupuestoRepository : IPresupuestoRepository
     string cadenaConexion = "Data Source=Db/Tienda.db";
     public void AgregarProducto(int IdPresupuesto, int IdProducto, int cantidad)
     {
+        DetallesPresupuestoViewModel detalles = GetProducto(IdPresupuesto, IdProducto);
+        if (detalles is not null)
+        {
+            cantidad += detalles.Cantidad;
+            UpdateProducto(IdPresupuesto, IdProducto, cantidad);
+        }
+        else
+        {
+            using var conexion = new SqliteConnection(cadenaConexion);
+            conexion.Open();
+            string sql = "INSERT INTO PresupuestosDetalle (idPresupuesto,idProducto,Cantidad) VALUES (@idpres,@idprod,@cant)";
+            using var comando = new SqliteCommand(sql, conexion);
+            comando.Parameters.Add(new SqliteParameter("@idprod", IdProducto));
+            comando.Parameters.Add(new SqliteParameter("@idpres", IdPresupuesto));
+            comando.Parameters.Add(new SqliteParameter("@cant", cantidad));
+            comando.ExecuteNonQuery();
+            conexion.Close();
+        }
+
+    }
+
+    public void UpdateProducto(int IdPresupuesto,int IdProducto,int cantidad)
+    {
         using var conexion = new SqliteConnection(cadenaConexion);
         conexion.Open();
-        string sql = "INSERT INTO PresupuestosDetalle (idPresupuesto,idProducto,Cantidad) VALUES (@idpres,@idprod,@cant)";
+        string sql = "UPDATE PresupuestosDetalle SET Cantidad = @cantidad WHERE idPresupuesto = @idPre AND idProducto = @idProd";
         using var comando = new SqliteCommand(sql, conexion);
-        comando.Parameters.Add(new SqliteParameter("@idprod", IdProducto));
-        comando.Parameters.Add(new SqliteParameter("@idpres", IdPresupuesto));
-        comando.Parameters.Add(new SqliteParameter("@cant", cantidad));
+        comando.Parameters.Add(new SqliteParameter("@cantidad", cantidad));
+        comando.Parameters.Add(new SqliteParameter("@idPre", IdPresupuesto));
+        comando.Parameters.Add(new SqliteParameter("@idProd", IdProducto));
         comando.ExecuteNonQuery();
         conexion.Close();
+    }
 
+    public void BorrarProducto(DetallesPresupuestoViewModel borrarProductoViewModel)
+    {
+        using var conexion = new SqliteConnection(cadenaConexion);
+        conexion.Open();
+        string sql = "DELETE FROM PresupuestosDetalle WHERE idPresupuesto = @idPre AND idProducto = @idPro";
+        using var comando = new SqliteCommand(sql, conexion);
+        comando.Parameters.Add(new SqliteParameter("@idPre", borrarProductoViewModel.IdPresupuesto));
+        comando.Parameters.Add(new SqliteParameter("@idPro", borrarProductoViewModel.producto.IdProducto));
+        comando.ExecuteNonQuery();
+        conexion.Close();
+    }
+
+    public DetallesPresupuestoViewModel GetProducto(int idPresupuesto,int idProducto)
+    {
+        using var conexion = new SqliteConnection(cadenaConexion);
+        conexion.Open();
+        string sql = "SELECT * FROM PresupuestosDetalle inner join Productos using(idProducto) WHERE idPresupuesto = @idPre AND idProducto = @idPro";
+        using var comando = new SqliteCommand(sql, conexion);
+        comando.Parameters.Add(new SqliteParameter("@idPre", idPresupuesto));
+        comando.Parameters.Add(new SqliteParameter("@idPro", idProducto));
+        using var lector = comando.ExecuteReader();
+        if (!lector.Read())
+        {
+            return null;
+        }
+        else
+        {
+            DetallesPresupuestoViewModel detalles = new DetallesPresupuestoViewModel
+            {
+                producto = new Producto
+                {
+                    IdProducto = Convert.ToInt32(lector["idProducto"]),
+                    Descripcion = lector["Descripcion"].ToString(),
+                    Precio = Convert.ToInt32(lector["Precio"])
+                },
+                Cantidad = Convert.ToInt32(lector["Cantidad"])
+            };
+            conexion.Close();
+            return detalles;
+        }
     }
 
     public void CrearPresupuesto(Presupuesto presupuesto)

@@ -1,5 +1,5 @@
-@using Presupuestos
-@model List<Presupuestos.Presupuesto>
+@using tl2_tp8_2025_carlitos0707.ViewModel
+@model List<PresupuestoViewModel>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -11,7 +11,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(Presupuesto presupuesto in @Model){
+        @foreach(PresupuestoViewModel presupuesto in @Model){
             <tr>
                 <td>@presupuesto.IdPresupuesto</td> <td>@presupuesto.NombreDestinatario</td> <td>@presupuesto.FechaCreacion</td> <td><a asp-action="Detalles" asp-route-id="@presupuesto.IdPresupuesto" asp-controller="Presupuestos" asp-area="">Ver detalles</a></td> <td><a asp-controller="Presupuestos" asp-action="Edit" asp-route-id="@presupuesto.IdPresupuesto" class="btn btn-warning">Editar</a></td> <td><a asp-controller="Presupuestos" asp-action="Delete" asp-route-id="@presupuesto.IdPresupuesto" class="btn btn-danger">Borrar</a></td>
             </tr>

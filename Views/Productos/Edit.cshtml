@@ -1,5 +1,5 @@
-@using Productos
-@model Producto
+@using tl2_tp8_2025_carlitos0707.ViewModel
+@model ProductoViewModel;
 
 
 <form asp-controller="Productos" asp-action="Edit" method="post">
@@ -11,3 +11,5 @@
     <input id="Precio" class="form-control" type="number" asp-for="Precio" />
     <input type="submit" class="btn" />
 </form>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

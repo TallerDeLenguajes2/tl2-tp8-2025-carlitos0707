@@ -1,10 +1,18 @@
-@using Productos
-@model Producto;
+@using tl2_tp8_2025_carlitos0707.ViewModel
+@model CrearProductoViewModel;
 <form asp-controller="Productos" asp-action="Create" method="post">
-    <input type="number" value="0" asp-for="IdProducto" hidden/>
-    <label for="Descripcion" class="form-label">Descripcion</label>
-    <input id="Descripcion" class="form-control" type="text" asp-for="Descripcion" >
-    <label for="Precio" class="form-label">Precio</label>
-    <input id="Precio" class="form-control" type="number" asp-for="Precio" />
+    <div class="form-group">
+        <label asp-for="Descripcion" class="control-label"></label>
+        <input asp-for="Descripcion" class="form-control" />
+        <span asp-validation-for="Descripcion" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Precio" class="control-label"></label>
+        <input asp-for="Precio" class="form-control" />
+        <span asp-validation-for="Precio" class="text-danger"></span>
+    </div>
+
     <input type="submit" class="btn" />
 </form>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }
