@@ -2,17 +2,18 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using tl2_tp8_2025_carlitos0707.Models;
 using tl2_tp8_2025_carlitos0707.ViewModel;
-
+using tl2_tp8_2025_carlitos0707.Repositorios;
+using tl2_tp8_2025_carlitos0707.Interfaces;
 namespace tl2_tp8_2025_carlitos0707.Controllers;
 
 public class ProductosController : Controller
 {
-    private readonly ProductoRepository repo;
+    private readonly IProductoRepository repo;
     private readonly ILogger<ProductosController> _logger;
 
-    public ProductosController(ILogger<ProductosController> logger)
+    public ProductosController(ILogger<ProductosController> logger,IProductoRepository r)
     {
-        repo = new ProductoRepository();
+        repo = r;
         _logger = logger;
     }
 

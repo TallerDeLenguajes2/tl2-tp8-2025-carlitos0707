@@ -1,8 +1,10 @@
 using Microsoft.Data.Sqlite;
 using tl2_tp8_2025_carlitos0707.Models;
 using SQLitePCL;
+using tl2_tp8_2025_carlitos0707.Interfaces;
+namespace tl2_tp8_2025_carlitos0707.Repositorios;
 
-
+/*
 public interface IProductoRepository
 {
     void Insertar(Producto producto);
@@ -11,7 +13,7 @@ public interface IProductoRepository
     Producto GetById(int id);
     void Delete(int id);
 }
-
+*/
 
 
 public class ProductoRepository : IProductoRepository

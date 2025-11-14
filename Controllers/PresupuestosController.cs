@@ -1,21 +1,22 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using tl2_tp8_2025_carlitos0707.Models;
-using PresupuestosRepository;
+using tl2_tp8_2025_carlitos0707.Repositorios;
 using tl2_tp8_2025_carlitos0707.ViewModel;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using tl2_tp8_2025_carlitos0707.Interfaces;
 namespace tl2_tp8_2025_carlitos0707.Controllers;
 
 public class PresupuestosController : Controller
 {
-    private readonly PresupuestoRepository repo;
-    private readonly ProductoRepository repoProductos;
+    private readonly IPresupuestoRepository repo;
+    private readonly IProductoRepository repoProductos;
     private readonly ILogger<PresupuestosController> _logger;
 
-    public PresupuestosController(ILogger<PresupuestosController> logger)
+    public PresupuestosController(ILogger<PresupuestosController> logger,IPresupuestoRepository r,IProductoRepository p)
     {
-        repo = new PresupuestoRepository();
-        repoProductos = new ProductoRepository();
+        repo = r;
+        repoProductos = p;
         _logger = logger;
     }
 
@@ -89,7 +90,7 @@ public class PresupuestosController : Controller
     [HttpGet]
     public IActionResult BorrarProducto(int idPresupuesto, int idProducto)
     {
-        DetallesPresupuestoViewModel detalles = repo.GetProducto(idPresupuesto, idProducto);
+        DetallePresupuesto detalles = repo.GetProducto(idPresupuesto, idProducto);
         if (detalles is null)
         {
             return View();

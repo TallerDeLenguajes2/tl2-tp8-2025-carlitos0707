@@ -1,10 +1,11 @@
-namespace PresupuestosRepository;
-
+namespace tl2_tp8_2025_carlitos0707.Repositorios;
+using tl2_tp8_2025_carlitos0707.Interfaces;
 using System.Data.SqlTypes;
 using Microsoft.Data.Sqlite;
 using tl2_tp8_2025_carlitos0707.Models;
 using tl2_tp8_2025_carlitos0707.ViewModel;
 
+/*
 public interface IPresupuestoRepository
 {
     List<Presupuesto> GetAll();
@@ -13,13 +14,13 @@ public interface IPresupuestoRepository
     Presupuesto ObtenerPorID(int id);
     void AgregarProducto(int IdPresupuesto, int IdProducto, int cantidad);
 }
-
+*/
 public class PresupuestoRepository : IPresupuestoRepository
 {
     string cadenaConexion = "Data Source=Db/Tienda.db";
     public void AgregarProducto(int IdPresupuesto, int IdProducto, int cantidad)
     {
-        DetallesPresupuestoViewModel detalles = GetProducto(IdPresupuesto, IdProducto);
+        DetallePresupuesto detalles = GetProducto(IdPresupuesto, IdProducto);
         if (detalles is not null)
         {
             cantidad += detalles.Cantidad;
@@ -65,7 +66,7 @@ public class PresupuestoRepository : IPresupuestoRepository
         conexion.Close();
     }
 
-    public DetallesPresupuestoViewModel GetProducto(int idPresupuesto,int idProducto)
+    public DetallePresupuesto GetProducto(int idPresupuesto,int idProducto)
     {
         using var conexion = new SqliteConnection(cadenaConexion);
         conexion.Open();
@@ -80,7 +81,7 @@ public class PresupuestoRepository : IPresupuestoRepository
         }
         else
         {
-            DetallesPresupuestoViewModel detalles = new DetallesPresupuestoViewModel
+            DetallePresupuesto detalles = new DetallePresupuesto
             {
                 producto = new Producto
                 {
