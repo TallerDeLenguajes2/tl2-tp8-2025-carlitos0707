@@ -24,12 +24,12 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/carlo/OneDrive/Desktop/3ero/Taller II/TP8/tl2-tp8-2025-carlitos0707/Views/Login/AccesoDenegado.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cQWNjZXNvRGVuZWdhZG8uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [c:/Users/carlo/OneDrive/Desktop/3ero/Taller II/TP8/tl2-tp8-2025-carlitos0707/Views/Login/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/carlo/OneDrive/Desktop/3ero/Taller II/TP8/tl2-tp8-2025-carlitos0707/Views/Presupuestos/AccesoDenegado.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlc3VwdWVzdG9zXEFjY2Vzb0RlbmVnYWRvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [c:/Users/carlo/OneDrive/Desktop/3ero/Taller II/TP8/tl2-tp8-2025-carlitos0707/Views/Presupuestos/AgregarProducto.cshtml]
@@ -58,6 +58,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [c:/Users/carlo/OneDrive/Desktop/3ero/Taller II/TP8/tl2-tp8-2025-carlitos0707/Views/Presupuestos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlc3VwdWVzdG9zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/carlo/OneDrive/Desktop/3ero/Taller II/TP8/tl2-tp8-2025-carlitos0707/Views/Productos/AccesoDenegado.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9zXEFjY2Vzb0RlbmVnYWRvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [c:/Users/carlo/OneDrive/Desktop/3ero/Taller II/TP8/tl2-tp8-2025-carlitos0707/Views/Productos/Create.cshtml]

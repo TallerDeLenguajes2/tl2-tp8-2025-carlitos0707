@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Session;
+using Microsoft.AspNetCore.Http;
 using tl2_tp8_2025_carlitos0707.Models;
 using tl2_tp8_2025_carlitos0707.Repositorios;
 using tl2_tp8_2025_carlitos0707.ViewModel;
@@ -11,17 +13,27 @@ public class PresupuestosController : Controller
 {
     private readonly IPresupuestoRepository repo;
     private readonly IProductoRepository repoProductos;
+    private readonly IAuthenticationService authenticationService;
     private readonly ILogger<PresupuestosController> _logger;
 
-    public PresupuestosController(ILogger<PresupuestosController> logger,IPresupuestoRepository r,IProductoRepository p)
+    public PresupuestosController(ILogger<PresupuestosController> logger,IPresupuestoRepository r,IProductoRepository p,IAuthenticationService a)
     {
         repo = r;
         repoProductos = p;
+        authenticationService = a;
         _logger = logger;
     }
 
     public IActionResult Index()
     {
+        if (!authenticationService.IsAuthenticated())
+        {
+            return View("Index","Login");
+        }
+        if (!(authenticationService.HasAccessLevel("Admin") || authenticationService.HasAccessLevel("Cliente")))
+        {
+            return View("AccesoDenegado");
+        }
         List<Presupuesto> presupuestos = repo.GetAll();
         List<PresupuestoViewModel> presupuestosViewModels = new List<PresupuestoViewModel>();
 
@@ -33,6 +45,14 @@ public class PresupuestosController : Controller
     }
     public IActionResult Detalles(int id)
     {
+        if (!authenticationService.IsAuthenticated())
+        {
+            return View("Index","Login");
+        }
+        if (!(authenticationService.HasAccessLevel("Admin") || authenticationService.HasAccessLevel("Cliente")))
+        {
+            return View("AccesoDenegado");
+        }
         Presupuesto presupuesto = repo.ObtenerPorID(id);
         if (presupuesto is null)
         {
@@ -47,6 +67,14 @@ public class PresupuestosController : Controller
     [HttpGet]
     public IActionResult Create()
     {
+        if (!authenticationService.IsAuthenticated())
+        {
+            return View("Index","Login");
+        }
+        if (!authenticationService.HasAccessLevel("Admin"))
+        {
+            return View("AccesoDenegado");
+        }
         CrearPresupuestoViewModel crearPresupuestoViewModel = new CrearPresupuestoViewModel();
         return View(crearPresupuestoViewModel);
     }
@@ -62,6 +90,14 @@ public class PresupuestosController : Controller
 
     public IActionResult AgregarProducto(int id)
     {
+        if (!authenticationService.IsAuthenticated())
+        {
+            return View("Index","Login");
+        }
+        if (!authenticationService.HasAccessLevel("Admin"))
+        {
+            return View("AccesoDenegado");
+        }
         Presupuesto presupuesto = repo.ObtenerPorID(id);
         if (presupuesto is null)
         {
@@ -90,6 +126,14 @@ public class PresupuestosController : Controller
     [HttpGet]
     public IActionResult BorrarProducto(int idPresupuesto, int idProducto)
     {
+        if (!authenticationService.IsAuthenticated())
+        {
+            return View("Index","Login");
+        }
+        if (!authenticationService.HasAccessLevel("Admin"))
+        {
+            return View("AccesoDenegado");
+        }
         DetallePresupuesto detalles = repo.GetProducto(idPresupuesto, idProducto);
         if (detalles is null)
         {
@@ -106,9 +150,17 @@ public class PresupuestosController : Controller
     }
 
 
-
+    [HttpGet]
     public IActionResult Edit(int id)
     {
+        if (!authenticationService.IsAuthenticated())
+        {
+            return View("Index","Login");
+        }
+        if (!authenticationService.HasAccessLevel("Admin"))
+        {
+            return View("AccesoDenegado");
+        }
         if (!ModelState.IsValid)
         {
             return RedirectToAction("Index");
@@ -125,9 +177,17 @@ public class PresupuestosController : Controller
         return RedirectToAction("Index");
     }
 
-
+    [HttpGet]
     public IActionResult Delete(int id)
     {
+        if (!authenticationService.IsAuthenticated())
+        {
+            return View("Index","Login");
+        }
+        if (!authenticationService.HasAccessLevel("Admin"))
+        {
+            return View("AccesoDenegado");
+        }
         PresupuestoViewModel presupuesto = new PresupuestoViewModel(repo.ObtenerPorID(id));
         return View(presupuesto);
     }
@@ -138,5 +198,11 @@ public class PresupuestosController : Controller
     {
         repo.Eliminar(presupuesto.IdPresupuesto);
         return RedirectToAction("Index");
+    }
+
+
+    public IActionResult AccesoDenegado()
+    {
+        return View();
     }
 }

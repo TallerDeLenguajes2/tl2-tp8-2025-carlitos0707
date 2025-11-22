@@ -5,7 +5,7 @@ namespace tl2_tp8_2025_carlitos0707.Repositorios;
 
 public class UsuarioRepository : IUserRepository
 {
-    readonly string CadenaConexion = "Db/Tienda.db";
+    readonly string CadenaConexion = "Data Source=Db/Tienda.db";
  // Lógica para conectar con la DB y buscar por user/pass.
     public Usuario GetUser(string usuario, string contrasena)
     {
@@ -13,15 +13,17 @@ public class UsuarioRepository : IUserRepository
         //Consulta SQL que busca por Usuario Y Contrasena
         const string sql = @"
         SELECT Id, Nombre, User, Pass, Rol
-        FROM Usuarios
+        FROM Usuario
         WHERE User = @Usuario AND Pass = @Contrasena";
         using var conexion = new SqliteConnection(CadenaConexion);
         conexion.Open();
         using var comando = new SqliteCommand(sql, conexion);
 
         // Se usan parámetros para
-        comando.Parameters.AddWithValue("@Usuario", usuario);
-        comando.Parameters.AddWithValue("@Contrasena",contrasena);
+        /*comando.Parameters.AddWithValue("@Usuario", usuario);
+        comando.Parameters.AddWithValue("@Contrasena",contrasena);*/
+        comando.Parameters.Add(new SqliteParameter("@Usuario",usuario));
+        comando.Parameters.Add(new SqliteParameter("@Contrasena",contrasena));
         using var reader = comando.ExecuteReader();
         if (reader.Read())
         {
