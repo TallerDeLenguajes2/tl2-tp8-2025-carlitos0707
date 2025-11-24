@@ -1,9 +1,14 @@
 @model LoginViewModel;
 
-<form asp-controller="Login" asp-action="Index" class="col-4 mx-auto border rounded" method="post">
+<form asp-controller="Login" asp-action="Login" class="col-4 mx-auto border rounded" method="post">
     <label for="user" class="form-label m-2" value="@if(@Model is not null){@Model.Username}">Usuario</label>
     <input type="text" id="user" class="form-control m-2" asp-for="Username" />
     <label for="pass" class="form-label m-2">Contraseña</label>
     <input type="password" id="pass" class="form-control m-2" asp-for="Password"  />
+    @if(@Model.ErrorMessage is not null){
+        <section class="alert alert-danger">
+            <p>@Model.ErrorMessage</p>
+        </section>
+    }
     <input type="submit" value="Entrar" class="btn btn-outline-primary m-2" />
 </form>

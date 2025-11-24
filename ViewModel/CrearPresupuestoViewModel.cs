@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace tl2_tp8_2025_carlitos0707.ViewModel;
 
 

@@ -6,7 +6,7 @@ namespace tl2_tp8_2025_carlitos0707.ViewModel;
 
 public class CrearProductoViewModel
 {
-    [StringLength(100)]
+    [StringLength(100,ErrorMessage = "ingrese menos de 100 caracteres")]
     public string Descripcion { get; set; }
 
     [Required(ErrorMessage = "Ingrese el precio")]

@@ -24,7 +24,7 @@ public class LoginController : Controller
     }
     // [HttpPost] Procesa el login
     [HttpPost]
-    public IActionResult Index(LoginViewModel model)
+    public IActionResult Login(LoginViewModel model)
     {
         if (string.IsNullOrEmpty(model.Username) || string.IsNullOrEmpty(model.Password))
         {
@@ -36,8 +36,8 @@ public class LoginController : Controller
             return RedirectToAction("Index", "Home");
         }
         model.ErrorMessage = "Credenciales inválidas.";
-        //return View("Index");
-        return RedirectToAction("Index", "Home");
+        return View("Index",model);
+        //return RedirectToAction("Index", "Home");
     }
     // [HttpGet] Cierra sesión
     public IActionResult Logout()
