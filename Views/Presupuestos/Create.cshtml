@@ -1,15 +1,25 @@
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+@using System.Text
 @using tl2_tp8_2025_carlitos0707.ViewModel;
 @model CrearPresupuestoViewModel
 
 <fieldset>
     <legend>Crear presupuesto</legend>
     <form asp-controller="Presupuestos" asp-action="Create" method="post">
-        <label for="Nombre" class="form-label">Nombre destinatario</label>
-        <input id="Nombre" class="form-control" type="text" asp-for="NombreDestinatario" />
+        <section>
+            <label for="Nombre" class="form-label">Nombre destinatario</label>
+            <input id="Nombre" class="form-control" type="text" asp-for="NombreDestinatario" />
+            <span asp-validation-for="NombreDestinatario" class="text-danger"></span>
+        </section>
         <label for="Fecha" class="form-label">Fecha de creacion</label>
         <input id="Fecha" class="form-control" type="datetime-local" asp-for="FechaCreacion"/>
+        <input type="submit" class="btn btn-outline-primary" />
     </form>
 </fieldset>
 
 
-@section Scripts { <partial name="_ValidationScriptsPartial" /> }
+@section Scripts
+{
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

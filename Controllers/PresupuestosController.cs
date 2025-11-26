@@ -83,6 +83,11 @@ public class PresupuestosController : Controller
     [HttpPost]
     public IActionResult Create(CrearPresupuestoViewModel presupuesto)
     {
+        if (!ModelState.IsValid)
+        {
+            presupuesto.MensajeError = "Ingrese todos los campos";
+            return View("Create");
+        }
         repo.CrearPresupuesto(new Presupuesto(presupuesto));
         return RedirectToAction("Index");
     }

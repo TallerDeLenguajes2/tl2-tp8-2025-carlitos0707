@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("tl2-tp8-2025-carlitos0707")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1490adfd51ee870253f519683222f89bf3685f12")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dd67b3269ef30ef0bd3e10bf7f70d9214c6ff74c")]
 [assembly: System.Reflection.AssemblyProductAttribute("tl2-tp8-2025-carlitos0707")]
 [assembly: System.Reflection.AssemblyTitleAttribute("tl2-tp8-2025-carlitos0707")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
